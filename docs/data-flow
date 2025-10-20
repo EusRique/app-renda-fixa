@@ -1,0 +1,31 @@
+
+## Detalhes do Fluxo
+
+1. **View (UI)**
+   - Captura eventos (cliques, digitação, etc).
+   - Dispara chamadas ao **ViewModel**.
+
+2. **ViewModel**
+   - Recebe ações da View.
+   - Decide se precisa consultar API (React Query), atualizar estados globais (Redux/Context) ou apenas manipular dados locais.
+   - Retorna para a View apenas o necessário para renderização.
+
+3. **Model**
+   - Garante a consistência dos dados (tipos do TypeScript, classes/entidades de domínio).
+   - Pode conter validações de negócio.
+
+4. **Data Source**
+   - Pode ser uma API REST, GraphQL, ou banco local (SQLite, AsyncStorage).
+   - A comunicação é encapsulada na camada `api/`.
+
+---
+
+## Exemplo Prático: Tela de Login
+
+- **View** → Usuário digita email e senha e clica em “Login”.
+- **ViewModel** → `useLoginViewModel` dispara `mutation` do React Query.
+- **Model** → Tipagem de `User` e `AuthResponse`.
+- **API** → Chamada POST `/login`.
+- **Redux** → Atualiza o estado global de sessão.
+- **Context** → Fornece dados do usuário autenticado para o restante da aplicação.
+- **View** → Atualiza UI com feedback (loading, erro, sucesso).
